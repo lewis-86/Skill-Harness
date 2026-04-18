@@ -1,0 +1,32 @@
+# Rule Configuration: struct-005
+# name-length
+
+id: struct-005
+name: name-length
+description: Ensures name field does not exceed maximum length
+
+validation:
+  dimension: structure
+  level: WARNING
+  phase: Phase 2
+
+requires:
+  - struct-001
+  - struct-002
+
+detection:
+  type: length_check
+  field: name
+  max_length: 64
+
+error_messages:
+  too_long: 'Invalid name: exceeds maximum length of 64 characters'
+
+severity:
+  blockers: 0
+  warnings: 1
+  hints: 0
+
+owner: skill-harness-team
+version: "1.0.0"
+created: "2026-04-11"

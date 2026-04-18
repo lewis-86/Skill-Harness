@@ -1,0 +1,35 @@
+# Rule Configuration: struct-003
+# description-required
+
+id: struct-003
+name: description-required
+description: Ensures frontmatter contains a non-empty description field
+
+validation:
+  dimension: structure
+  level: BLOCKER
+  phase: MVP
+
+requires:
+  - struct-001  # frontmatter must exist first
+  - struct-002  # name should exist first (logical order)
+
+detection:
+  type: field_exists
+  field: description
+  field_type: string
+  allow_empty: false
+
+error_messages:
+  missing_field: "Missing required field: description"
+  wrong_type: "Invalid description: must be a string"
+  empty_value: "Invalid description: cannot be empty"
+
+severity:
+  blockers: 1
+  warnings: 0
+  hints: 0
+
+owner: skill-harness-team
+version: "1.0.0"
+created: "2026-04-11"

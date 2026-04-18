@@ -1,0 +1,29 @@
+# Rule Configuration: style-002
+# no-trailing-whitespace
+
+id: style-002
+name: no-trailing-whitespace
+description: Ensures no trailing whitespace at end of lines
+
+validation:
+  dimension: style
+  level: HINT
+  phase: Phase 5
+
+requires:
+  - struct-001
+
+detection:
+  type: whitespace_check
+
+error_messages:
+  trailing_whitespace: 'Line has trailing whitespace'
+
+severity:
+  blockers: 0
+  warnings: 0
+  hints: 1
+
+owner: skill-harness-team
+version: "1.0.0"
+created: "2026-04-11"

@@ -1,0 +1,32 @@
+# Rule Configuration: struct-001
+# frontmatter-required
+
+id: struct-001
+name: frontmatter-required
+description: Ensures SKILL.md has a valid YAML frontmatter block
+
+validation:
+  dimension: structure
+  level: BLOCKER
+  phase: MVP
+
+detection:
+  type: pattern
+  pattern: |
+    1. Check first line is "---"
+    2. Find second "---" (closing marker)
+    3. Verify frontmatter is not empty between markers
+
+error_messages:
+  missing_frontmatter: "Missing frontmatter: file must start with ---"
+  incomplete_frontmatter: "Incomplete frontmatter: missing closing ---"
+  empty_frontmatter: "Empty frontmatter: must contain at least name and description"
+
+severity:
+  blockers: 1
+  warnings: 0
+  hints: 0
+
+owner: skill-harness-team
+version: "1.0.0"
+created: "2026-04-11"

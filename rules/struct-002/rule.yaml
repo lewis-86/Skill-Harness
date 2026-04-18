@@ -1,0 +1,34 @@
+# Rule Configuration: struct-002
+# name-required
+
+id: struct-002
+name: name-required
+description: Ensures frontmatter contains a non-empty name field
+
+validation:
+  dimension: structure
+  level: BLOCKER
+  phase: MVP
+
+requires:
+  - struct-001  # frontmatter must exist first
+
+detection:
+  type: field_exists
+  field: name
+  field_type: string
+  allow_empty: false
+
+error_messages:
+  missing_field: "Missing required field: name"
+  wrong_type: "Invalid name: must be a string"
+  empty_value: "Invalid name: cannot be empty"
+
+severity:
+  blockers: 1
+  warnings: 0
+  hints: 0
+
+owner: skill-harness-team
+version: "1.0.0"
+created: "2026-04-11"

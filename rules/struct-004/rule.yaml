@@ -1,0 +1,34 @@
+# Rule Configuration: struct-004
+# name-format
+
+id: struct-004
+name: name-format
+description: Ensures name field follows kebab-case convention
+
+validation:
+  dimension: structure
+  level: WARNING
+  phase: Phase 2
+
+requires:
+  - struct-001
+  - struct-002
+
+detection:
+  type: regex
+  pattern: '^[a-z][a-z0-9-]*$'
+  flags: ''
+
+error_messages:
+  invalid_format: 'Invalid name format: must be lowercase with hyphens only (kebab-case)'
+  ends_with_hyphen: 'Invalid name format: cannot end with hyphen'
+  starts_with_number: 'Invalid name format: cannot start with number'
+
+severity:
+  blockers: 0
+  warnings: 1
+  hints: 0
+
+owner: skill-harness-team
+version: "1.0.0"
+created: "2026-04-11"

@@ -1,0 +1,37 @@
+# Rule Configuration: semantic-004
+# description-no-placeholder
+
+id: semantic-004
+name: description-no-placeholder
+description: Ensures description does not contain placeholder text
+
+validation:
+  dimension: semantic
+  level: WARNING
+  phase: Phase 3
+
+requires:
+  - struct-001
+  - struct-003
+
+detection:
+  type: no_placeholder
+  patterns:
+    - 'TBD'
+    - 'TODO'
+    - 'FIXME'
+    - '\[.*\]'
+    - '\(insert.*\)'
+    - '\(add.*\)'
+
+error_messages:
+  has_placeholder: 'Description contains placeholder text (TBD, TODO, [xxx], etc.)'
+
+severity:
+  blockers: 0
+  warnings: 1
+  hints: 0
+
+owner: skill-harness-team
+version: "1.0.0"
+created: "2026-04-11"

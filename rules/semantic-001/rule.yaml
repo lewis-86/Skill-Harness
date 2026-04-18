@@ -1,0 +1,34 @@
+# Rule Configuration: semantic-001
+# description-start
+
+id: semantic-001
+name: description-start
+description: Ensures description starts with "Use when..." for optimal triggering
+
+validation:
+  dimension: semantic
+  level: WARNING
+  phase: Phase 3
+
+requires:
+  - struct-001
+  - struct-003
+
+detection:
+  type: starts_with
+  valid_starts:
+    - 'use when'
+    - 'use this when'
+    - 'use the'
+
+error_messages:
+  invalid_start: 'Description should start with "Use when..." for optimal triggering'
+
+severity:
+  blockers: 0
+  warnings: 1
+  hints: 0
+
+owner: skill-harness-team
+version: "1.0.0"
+created: "2026-04-11"

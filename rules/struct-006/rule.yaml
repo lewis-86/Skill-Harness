@@ -1,0 +1,32 @@
+# Rule Configuration: struct-006
+# description-length
+
+id: struct-006
+name: description-length
+description: Ensures description field does not exceed maximum length
+
+validation:
+  dimension: structure
+  level: HINT
+  phase: Phase 2
+
+requires:
+  - struct-001
+  - struct-003
+
+detection:
+  type: length_check
+  field: description
+  max_length: 1024
+
+error_messages:
+  too_long: 'Invalid description: exceeds maximum length of 1024 characters'
+
+severity:
+  blockers: 0
+  warnings: 0
+  hints: 1
+
+owner: skill-harness-team
+version: "1.0.0"
+created: "2026-04-11"

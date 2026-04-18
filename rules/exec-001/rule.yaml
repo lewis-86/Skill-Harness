@@ -1,0 +1,33 @@
+# Rule Configuration: exec-001
+# reference-accessible
+
+id: exec-001
+name: reference-accessible
+description: Ensures referenced files and paths are accessible
+
+validation:
+  dimension: executable
+  level: WARNING
+  phase: Phase 4
+
+requires:
+  - struct-001
+
+detection:
+  type: reference_check
+  patterns:
+    - markdown_link: '\[.*\]\((.*?)\)'
+    - relative_path: '\.\./\w+'
+    - script_path: '\./\w+'
+
+error_messages:
+  inaccessible: 'Referenced path is not accessible: '
+
+severity:
+  blockers: 0
+  warnings: 1
+  hints: 0
+
+owner: skill-harness-team
+version: "1.0.0"
+created: "2026-04-11"

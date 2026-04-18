@@ -1,0 +1,29 @@
+# Rule Configuration: style-001
+# code-blocks-have-language
+
+id: style-001
+name: code-blocks-have-language
+description: Ensures code blocks specify a language for syntax highlighting
+
+validation:
+  dimension: style
+  level: HINT
+  phase: Phase 5
+
+requires:
+  - struct-001
+
+detection:
+  type: code_block_check
+
+error_messages:
+  missing_language: 'Code block should specify a language for syntax highlighting'
+
+severity:
+  blockers: 0
+  warnings: 0
+  hints: 1
+
+owner: skill-harness-team
+version: "1.0.0"
+created: "2026-04-11"

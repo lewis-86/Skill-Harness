@@ -1,0 +1,30 @@
+# Rule Configuration: exec-002
+# script-path-valid
+
+id: exec-002
+name: script-path-valid
+description: Ensures scripts/ directory and paths are valid
+
+validation:
+  dimension: executable
+  level: WARNING
+  phase: Phase 4
+
+requires:
+  - struct-001
+
+detection:
+  type: script_path_check
+
+error_messages:
+  missing_scripts_dir: 'scripts/ directory is missing'
+  invalid_script_path: 'Referenced script path is invalid: '
+
+severity:
+  blockers: 0
+  warnings: 1
+  hints: 0
+
+owner: skill-harness-team
+version: "1.0.0"
+created: "2026-04-11"

@@ -1,0 +1,29 @@
+# Rule Configuration: style-003
+# consistent-list-markers
+
+id: style-003
+name: consistent-list-markers
+description: Ensures consistent use of list markers (- or *)
+
+validation:
+  dimension: style
+  level: HINT
+  phase: Phase 5
+
+requires:
+  - struct-001
+
+detection:
+  type: list_marker_check
+
+error_messages:
+  inconsistent_marker: 'Inconsistent list marker, found both - and *'
+
+severity:
+  blockers: 0
+  warnings: 0
+  hints: 1
+
+owner: skill-harness-team
+version: "1.0.0"
+created: "2026-04-11"

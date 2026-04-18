@@ -1,0 +1,40 @@
+# Rule Configuration: semantic-003
+# description-trigger
+
+id: semantic-003
+name: description-trigger
+description: Ensures description contains trigger conditions
+
+validation:
+  dimension: semantic
+  level: WARNING
+  phase: Phase 3
+
+requires:
+  - struct-001
+  - struct-003
+
+detection:
+  type: contains_trigger
+  min_length: 10
+  trigger_phrases:
+    - 'when '
+    - 'whenever '
+    - 'if the user'
+    - 'if you need'
+    - 'for '
+    - 'during '
+    - 'in case of'
+    - 'upon '
+
+error_messages:
+  no_trigger: 'Description must contain trigger conditions (e.g., "when", "if", "for")'
+
+severity:
+  blockers: 0
+  warnings: 1
+  hints: 0
+
+owner: skill-harness-team
+version: "1.0.0"
+created: "2026-04-11"

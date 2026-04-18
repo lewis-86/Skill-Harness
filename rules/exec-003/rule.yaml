@@ -1,0 +1,30 @@
+# Rule Configuration: exec-003
+# skill-name-consistent
+
+id: exec-003
+name: skill-name-consistent
+description: Ensures directory name matches the skill name in frontmatter
+
+validation:
+  dimension: executable
+  level: HINT
+  phase: Phase 4
+
+requires:
+  - struct-001
+  - struct-002
+
+detection:
+  type: name_consistency_check
+
+error_messages:
+  inconsistent: 'Directory name does not match skill name in frontmatter'
+
+severity:
+  blockers: 0
+  warnings: 0
+  hints: 1
+
+owner: skill-harness-team
+version: "1.0.0"
+created: "2026-04-11"
