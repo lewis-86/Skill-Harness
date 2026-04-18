@@ -299,7 +299,7 @@ description: Use when the user wants to create PDFs.
 
 Content`;
       const report = linter.lintContent(content, 'test.md');
-      const result = report.warnings.find(r => r.ruleId === 'semantic-001');
+      const result = report.hints.find(r => r.ruleId === 'semantic-001');
       expect(result).toBeUndefined();
     });
 
@@ -311,7 +311,7 @@ description: This skill creates PDF files.
 
 Content`;
       const report = linter.lintContent(content, 'test.md');
-      const result = report.warnings.find(r => r.ruleId === 'semantic-001');
+      const result = report.hints.find(r => r.ruleId === 'semantic-001');
       expect(result).toBeDefined();
       expect(result!.message).toContain('Use when');
     });

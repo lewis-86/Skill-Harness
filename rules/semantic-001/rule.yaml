@@ -7,7 +7,7 @@ description: Ensures description starts with "Use when..." for optimal triggerin
 
 validation:
   dimension: semantic
-  level: WARNING
+  level: HINT
   phase: Phase 3
 
 requires:
@@ -19,15 +19,24 @@ detection:
   valid_starts:
     - 'use when'
     - 'use this when'
+    - 'use this skill'
     - 'use the'
+    - 'use a'
+    - 'use these'
+    - 'use it'
+    - 'use it to'
+    - 'when the user'
+    - 'whenever the user'
+    - 'when you need'
+    - 'for'
 
 error_messages:
   invalid_start: 'Description should start with "Use when..." for optimal triggering'
 
 severity:
   blockers: 0
-  warnings: 1
-  hints: 0
+  warnings: 0
+  hints: 1
 
 owner: skill-harness-team
 version: "1.0.0"

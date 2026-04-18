@@ -3,7 +3,16 @@ import { Rule, ValidationResult, Level, ParsedSkill, SkillFrontmatter } from '..
 const VALID_STARTS = [
   'use when',
   'use this when',
-  'use the '
+  'use this skill',
+  'use the ',
+  'use a ',
+  'use these',
+  'use it',
+  'use it to',
+  'when the user',
+  'whenever the user',
+  'when you need',
+  'for ',
 ];
 
 /**
@@ -14,7 +23,7 @@ export class DescriptionStartRule implements Rule {
   readonly id = 'semantic-001';
   readonly name = 'description-start';
   readonly description = 'Ensures description starts with "Use when..." for optimal triggering';
-  readonly level = Level.WARNING;
+  readonly level = Level.HINT;
 
   validate(skill: ParsedSkill, frontmatter: SkillFrontmatter | null): ValidationResult {
     if (frontmatter === null) {
