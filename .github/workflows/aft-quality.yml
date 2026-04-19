@@ -13,6 +13,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -27,7 +31,7 @@ jobs:
           CHANGED=$(git diff --name-only ${{ github.base_ref }}...HEAD)
           echo "files=$CHANGED" >> $GITHUB_OUTPUT
 
-      - name: Run linter on changed files
+      - name: Generate lint results
         run: |
           mkdir -p lint-results
           for file in ${{ steps.changed.outputs.files }}; do
@@ -36,13 +40,6 @@ jobs:
               node dist/lint/cli.js "$file" 2>/dev/null || true
             fi
           done
-
-      - name: Run AFT Comment
-        if: success() || failure()
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          DIFF=$(git diff ${{ github.base_ref }}...HEAD)
           node -e "
             const fs = require('fs');
             const files = '${{ steps.changed.outputs.files }}'.split('\n').filter(f => f && f.endsWith('.md'));
@@ -59,6 +56,15 @@ jobs:
             fs.writeFileSync('lint-results.jsonl', out);
           " 2>/dev/null || echo "" > lint-results.jsonl
 
+      - name: Install AFT
+        run: pip install git+https://github.com/lewis-86/aft.git
+
+      - name: Run AFT Comment
+        if: success() || failure()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DIFF=$(git diff ${{ github.base_ref }}...HEAD)
           aft post-comment \
             --diff "$DIFF" \
             --lint-report lint-results.jsonl \
