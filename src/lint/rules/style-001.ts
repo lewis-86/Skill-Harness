@@ -1,14 +1,21 @@
-import { Rule, ValidationResult, Level, ParsedSkill, SkillFrontmatter } from '../core/types';
+import { Rule, ValidationResult, Level, ParsedSkill, SkillFrontmatter, RuleCategory, QualityDimension, FixImpact } from '../core/types';
 
 /**
  * Rule style-001: code-blocks-have-language
  * 检查代码块是否指定了语言标识符
+ *
+ * Human-friendly: 帮助人类开发者获得更好的代码高亮显示
+ * AI-friendly: AI 可以自动检测并修复，检测模式简单明确
  */
 export class CodeBlocksHaveLanguageRule implements Rule {
   readonly id = 'style-001';
   readonly name = 'code-blocks-have-language';
   readonly description = 'Ensures code blocks specify a language for syntax highlighting';
+  readonly category = RuleCategory.STYLE;
+  readonly dimensions = [QualityDimension.MAINTAINABILITY];
   readonly level = Level.HINT;
+  readonly autoFixable = true;
+  readonly fixImpact = FixImpact.LOW;
 
   validate(skill: ParsedSkill, frontmatter: SkillFrontmatter | null): ValidationResult {
     const content = skill.content;
@@ -20,20 +27,14 @@ export class CodeBlocksHaveLanguageRule implements Rule {
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
 
-      // 遇到代码块开始/结束标记
       if (line.startsWith('```')) {
         if (!insideCodeBlock) {
-          // 这是开代码块
           insideCodeBlock = true;
-          // 检查是否有语言标识符
-          // 开代码块格式: ```javascript (有语言), ``` (无语言)
           const match = line.match(/^```(\w+)$/);
           if (!match) {
-            // 没有有效的语言标识符
             missingLangLines.push(i + 1);
           }
         } else {
-          // 这是闭代码块
           insideCodeBlock = false;
         }
       }
@@ -47,7 +48,19 @@ export class CodeBlocksHaveLanguageRule implements Rule {
         ruleName: this.name,
         passed: false,
         level: this.level,
-        message: `代码块缺少语言标识符: ${lineList}${more}`
+        message: `代码块缺少语言标识符: ${lineList}${more}`,
+        aiHint: {
+          what: `有 ${missingLangLines.length} 个代码块未指定语言标识符`,
+          why: '没有语言标识符，代码高亮不生效，影响可读性；AI 也难以判断代码类型',
+          how: '在 ``` 后添加语言标识符，如 ```javascript、```python、```bash',
+          example: {
+            bad: '```\nconsole.log("hello")\n```',
+            good: '```javascript\nconsole.log("hello")\n```'
+          }
+        },
+        fixable: true,
+        fixImpact: this.fixImpact,
+        position: { line: missingLangLines[0] }
       };
     }
 

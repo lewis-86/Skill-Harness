@@ -19,3 +19,18 @@ export * from './lint/rules/exec-003';
 export * from './lint/rules/style-001';
 export * from './lint/rules/style-002';
 export * from './lint/rules/style-003';
+
+export * from './compile/types';
+export * from './compile/compiler';
+
+export * from './debug/types';
+export * from './debug/debugger';
+
+export * from './profile/types';
+export * from './profile/profiler';
+
+export * from './workflow';
+
+export * from './config/types';
+export * from './config/loader';
+export * from './config/filter';

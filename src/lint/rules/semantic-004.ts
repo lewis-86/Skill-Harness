@@ -4,9 +4,12 @@ const PLACEHOLDER_PATTERNS = [
   /\btbd\b/i,
   /\btodo\b/i,
   /\bfixme\b/i,
-  /\[.*\]/,           // [xxx]
-  /\(insert.*\)/i,
-  /\(add.*\)/i,
+  /\[xxx\]/i,                                               // [xxx]
+  /\[(?:your|todo|tbd|example|placeholder|sample)\s+\w+\]/i,  // [your x], [TODO]
+  /\[insert\s+(?:trigger|your|a|the)\s+here\]/i,             // [insert trigger here]
+  /\(insert\s+(?:your|the|a)\s+\w+\s+here\)/i,              // (insert your name here)
+  /\(add\s+(?:your|the|a)\s+\w+\s+here\)/i,                  // (add your description here)
+  /<(?:insert|add)\s+(?:your|the|a)\s+\w+\s+here>/i,         // <insert your name here>
 ];
 
 /**

@@ -275,8 +275,8 @@ Content`;
       expect(result).toBeUndefined();
     });
 
-    it('should fail for descriptions exceeding 1024 characters', () => {
-      const description = 'a'.repeat(1025);
+    it('should fail for descriptions exceeding 2048 characters', () => {
+      const description = 'a'.repeat(2049);
       const content = `---
 name: my-skill
 description: ${description}
@@ -286,7 +286,7 @@ Content`;
       const report = linter.lintContent(content, 'test.md');
       const result = report.hints.find(r => r.ruleId === 'struct-006');
       expect(result).toBeDefined();
-      expect(result!.message).toContain('1024');
+      expect(result!.message).toContain('2048');
     });
   });
 

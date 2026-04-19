@@ -1,6 +1,6 @@
 import { Rule, ValidationResult, Level, ParsedSkill, SkillFrontmatter } from '../core/types';
 
-const MAX_DESCRIPTION_LENGTH = 1024;
+const MAX_DESCRIPTION_LENGTH = 2048;
 
 /**
  * Rule struct-006: description-length

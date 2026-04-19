@@ -9,6 +9,8 @@ import { getAllRules } from './registry';
 export interface LinterConfig {
   rules?: Rule[];
   failOnBlocker?: boolean;
+  /** Enable/disable specific rules by ID */
+  enabledRules?: Record<string, boolean>;
 }
 
 /**
@@ -18,7 +20,17 @@ export class Linter {
   private rules: Rule[];
 
   constructor(config: LinterConfig = {}) {
-    this.rules = config.rules || getAllRules();
+    const allRules = config.rules || getAllRules();
+
+    if (config.enabledRules) {
+      // Filter rules based on enabled config
+      this.rules = allRules.filter(rule => {
+        const enabled = config.enabledRules![rule.id];
+        return enabled === undefined || enabled === true;
+      });
+    } else {
+      this.rules = allRules;
+    }
   }
 
   /**

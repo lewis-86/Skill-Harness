@@ -2,13 +2,42 @@ import { Rule, ValidationResult, Level, ParsedSkill, SkillFrontmatter } from '..
 
 const MIN_LENGTH = 10;
 const TRIGGER_PHRASES = [
+  // Original trigger phrases
   'when ',
   'whenever ',
   'if the user',
   'if you need',
   'for ',
   'in case of',
-  'upon '
+  'upon ',
+  // Action verb patterns (common in SOTA skills)
+  'connect ',
+  'access ',
+  'search',
+  'extract',
+  'query ',
+  'create ',
+  'build ',
+  'manage ',
+  'analyze',
+  'execute ',
+  'delegate ',
+  'generate ',
+  'design ',
+  'guide ',
+  'provide',
+  'download ',
+  'automate',
+  'debug ',
+  'improve ',
+  'identify ',
+  'process ',
+  'stage ',
+  'fetch ',
+  'edit ',
+  'transform ',
+  'run ',
+  'explore ',
 ];
 
 /**
